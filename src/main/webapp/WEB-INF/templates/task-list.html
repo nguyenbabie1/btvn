@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Danh sach cong viec</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 2rem; }
+        table { border-collapse: collapse; width: 100%; max-width: 900px; }
+        th, td { border: 1px solid #ccc; padding: 0.5rem 0.75rem; text-align: left; }
+        th { background: #f0f0f0; }
+        .actions { margin-bottom: 1rem; }
+        a.button { display: inline-block; padding: 0.4rem 0.8rem; background: #2563eb; color: #fff; text-decoration: none; border-radius: 4px; }
+        a.button:hover { background: #1d4ed8; }
+    </style>
+</head>
+<body>
+<h1>Danh sach cong viec</h1>
+
+<p class="actions">
+    <a class="button" th:href="@{/tasks/new}">Them cong viec moi</a>
+</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Ma</th>
+        <th>Ten cong viec</th>
+        <th>Han hoan thanh</th>
+        <th>Uu tien</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(tasks)}">
+        <td colspan="4">Chua co cong viec nao.</td>
+    </tr>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.id}">id</td>
+        <td th:text="${task.title}">title</td>
+        <td th:text="${#temporals.format(task.deadline, 'dd/MM/yyyy')}">deadline</td>
+        <td th:text="${task.priority}">priority</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

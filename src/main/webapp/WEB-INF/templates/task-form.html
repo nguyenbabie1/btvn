@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Them cong viec</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 2rem; max-width: 480px; }
+        label { display: block; margin-top: 1rem; font-weight: 600; }
+        input, select { width: 100%; padding: 0.4rem; margin-top: 0.25rem; box-sizing: border-box; }
+        .error { color: #dc2626; font-size: 0.875rem; margin-top: 0.25rem; }
+        button { margin-top: 1.25rem; padding: 0.5rem 1rem; cursor: pointer; }
+        a.back { display: inline-block; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+<h1>Them cong viec moi</h1>
+
+<form th:action="@{/tasks}" th:object="${taskItem}" method="post">
+    <label for="title">Ten cong viec</label>
+    <input id="title" type="text" th:field="*{title}" autocomplete="off"/>
+    <p class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+
+    <label for="deadline">Han hoan thanh</label>
+    <input id="deadline" type="date" th:field="*{deadline}"/>
+    <p class="error" th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}"></p>
+
+    <label for="priority">Muc do uu tien</label>
+    <select id="priority" th:field="*{priority}">
+        <option value="">-- Chon --</option>
+        <option value="HIGH">HIGH</option>
+        <option value="MEDIUM">MEDIUM</option>
+        <option value="LOW">LOW</option>
+    </select>
+    <p class="error" th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}"></p>
+
+    <button type="submit">Luu</button>
+</form>
+
+<p><a class="back" th:href="@{/tasks}">&larr; Quay lai danh sach</a></p>
+</body>
+</html>
